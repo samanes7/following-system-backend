@@ -20,28 +20,55 @@ following-system/
 └── server.js
 
 3. پیاده‌سازی database.js
+4. پیاده‌سازی user.js
+5. پیاده‌سازی userController.js
+6. پیاده‌سازی api.js
+7. پیاده‌سازی app.js
+8. پیاده‌سازی server.js
+9. مستندسازی و داکیومنت برای تست API
 
-   const sqlite3 = require('sqlite3').verbose();
+برای مستندسازی API، می‌توانیم از Postman برای ایجاد و تست درخواست‌ها استفاده کنیم. همچنین می‌توانید از Swagger برای مستندسازی استفاده کنیم.
 
-const db = new sqlite3.Database(':memory:');
+نمونه درخواست‌ها:
 
-db.serialize(() => {
-  db.run(`CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
-  )`);
+ایجاد کاربر:
 
-  db.run(`CREATE TABLE follows (
-    follower_id INTEGER,
-    followee_id INTEGER,
-    follow_date DATE,
-    PRIMARY KEY (follower_id, followee_id),
-    FOREIGN KEY (follower_id) REFERENCES users(id),
-    FOREIGN KEY (followee_id) REFERENCES users(id)
-  )`);
-});
+URL: POST /api/users
+Body:
 
-module.exports = db;
+{
+  "name": "John Doe"
+}
+دنبال‌کردن کاربر:
+
+URL: POST /api/follow
+Body:
+
+{
+  "followerId": 1,
+  "followeeId": 2
+}
+لغو دنبال‌کردن کاربر:
+
+URL: POST /api/unfollow
+Body:
+
+{
+  "followerId": 1,
+  "followeeId": 2
+}
+گرفتن دنبال‌کنندگان یک کاربر:
+
+URL: GET /api/followers/:userId
+گرفتن دنبال‌کنندگان مشترک بین دو کاربر:
+
+URL: GET /api/common-followers/:userId1/:userId2
+
+اجرای پروژه
+برای اجرای پروژه، از دستور زیر استفاده میکنیم:
+
+node server.js
+
 
 
 
