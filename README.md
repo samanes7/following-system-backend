@@ -1,5 +1,5 @@
 # following-system-backend
-#1. ایجاد پروژه Node.js
+# 1. ایجاد پروژه Node.js
 ابتدا یک پروژه جدید Node.js ایجاد کرده و کتابخانه‌های مورد نیاز را نصب میکنیم:
 mkdir following-system
 cd following-system
